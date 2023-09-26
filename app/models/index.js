@@ -1,7 +1,7 @@
-const dbConfig = require('../../config/db.config.js');
+const { Sequelize } = require('sequelize');
+const dbConfig = require('../../config/db.config');
 
-const sequelizeModule = require('sequelize');
-const sequelize = new sequelizeModule(
+const sequelize = new Sequelize(
     dbConfig.DB,
     dbConfig.USER,
     dbConfig.PASSWORD,
@@ -19,10 +19,10 @@ const sequelize = new sequelizeModule(
 );
 
 const db = {
-    sequelizeModule : sequelizeModule,
     sequelize : sequelize,
 };
 
-db.banners = require('./banner.model.js')(sequelize, sequelizeModule);
+//All Models
+db.banners = require('./banner.model')(sequelize);
 
 module.exports = db;
