@@ -1,18 +1,27 @@
-const db = require("../models");
+import BannerModel from "../models/banner.model.js";
+import { ApiResponse } from "../utils/api-response.js";
 
-const Banner = db.banners;
+const index = (req, res) => {
+    BannerModel.findAll()
+        .then((data) => {
+            ApiResponse(res, data)
+        })
+        .catch((error) => {
+            ApiResponse(res, null, error)
+        });
+};
 
-exports.findAll = (req, res) => {
-    Banner.findAll()
-      .then((books) => {
-        res.json({
-          data: books,
+const show = (req, res, next) => {
+    BannerModel.findByPk(req.params.id)
+        .then((data) => {
+            ApiResponse(res, data)
+        })
+        .catch((error) => {
+            ApiResponse(res, null, error)
         });
-      })
-      .catch((err) => {
-        res.status(500).json({
-          message: err.message || "Some error occurred while retrieving data.",
-          data: null,
-        });
-      });
-  };
+};
+
+export default {
+    index,
+    show,
+}
