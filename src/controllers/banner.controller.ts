@@ -1,7 +1,8 @@
-import BannerModel from "../models/banner.model.js";
-import { ApiResponse } from "../utils/api-response.js";
+import BannerModel from "../models/banner.model";
+import { ApiResponse } from "../utils/api-response";
+import { Request, Response, NextFunction } from "express";
 
-const index = (req, res) => {
+const index = (req: Request, res: Response, next: NextFunction) => {
     BannerModel.findAll()
         .then((data) => {
             ApiResponse(res, data)
@@ -11,7 +12,7 @@ const index = (req, res) => {
         });
 };
 
-const show = (req, res, next) => {
+const show = (req: Request, res: Response, next: NextFunction) => {
     BannerModel.findByPk(req.params.id)
         .then((data) => {
             ApiResponse(res, data)

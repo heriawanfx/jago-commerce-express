@@ -3,11 +3,11 @@ import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
 import bodyParser from "body-parser";
-import ApiRoute from "./app/routes/api.route.js";
-import WebRoute from "./app/routes/web.route.js";
-import dbConfig from "./config/db.config.js";
+import ApiRoute from "./routes/api.route";
+import WebRoute from "./routes/web.route";
+import dbConfig from "./config/db.config";
 import dotenv from "dotenv";
-import sessionMiddleware from "./app/middleware/session.middleware.js";
+import sessionMiddleware from "./middleware/session.middleware";
 import morgan from "morgan";
 import errorHandler from "errorhandler";
 
@@ -33,7 +33,7 @@ app.use('/api', ApiRoute);
 app.use('/', WebRoute);
 
 if (process.env.APP_ENV != 'production') {
-    app.use(morgan());
+    app.use(morgan('dev'));
     app.use(errorHandler())
 }
 

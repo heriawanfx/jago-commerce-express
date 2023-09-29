@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import dbConfig from "../../config/db.config.js";
+import dbConfig from "../config/db.config";
 
 
 class Banner extends Model{};
